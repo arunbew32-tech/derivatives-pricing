@@ -3,27 +3,23 @@ from scipy.stats import norm
 # values
 
 
-
 #defining a function to run the whole operation in one go
-def Black_Scholes(S_0, r,T,X,sigma):
+def black_scholes(S_0, r,T,X,sigma, option_type):
     d_1 = ((np.log(S_0/X)) + (r + (sigma**(2))/2)*T)/(sigma*(np.sqrt(T)))
     d_2 = d_1 - sigma*np.sqrt(T)
 
-    Option = input("call or put?   ")
-
-    C = S_0*norm.cdf(d_1) - X * np.exp(-r * T) * norm.cdf(d_2)
-    P = X*np.exp(-r * T) * norm.cdf(-d_2) - S_0*norm.cdf(-d_1)
-
-    if Option == "call":
+    if option_type == "call":
+        C = S_0*norm.cdf(d_1) - X * np.exp(-r * T) * norm.cdf(d_2)
         return C
-    elif Option == "put":
+    elif option_type == "put":
+        P = X*np.exp(-r * T) * norm.cdf(-d_2) - S_0*norm.cdf(-d_1)
         return P
     else:
-        return("None")
+        return("Error")
 
-call_price = Black_Scholes(1.2, 0.02, 0.5, 1.25, 0.25)
+price = black_scholes(1.2, 0.02, 0.5, 1.25, 0.25, "call")
 
-print(f"Your option price is {call_price:.3f}")
+print(f"Your option price is {price}")
 
 
 # assumptions the model is making:
