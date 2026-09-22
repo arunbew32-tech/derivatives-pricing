@@ -13,7 +13,6 @@ def d1_d2(S_0, r,T,X,sigma,q):
     d_2 = d_1 - sigma*np.sqrt(T)
     return d_1, d_2
 
-
 def black_scholes(S_0, r,T,X,sigma,q, option_type):
     d_1, d_2 = d1_d2(S_0, r,T,X,sigma,q)
 
@@ -35,7 +34,6 @@ put_price = black_scholes(1.2,0.02,0.5,1.25,0.25,0,"put")
 discrepancy = (call_price - put_price) - put_call_parity(1.2, 0.02, 0.5, 1.25,0)
 
 print(f"Discrepancy:  {discrepancy:.5f}  ")
-
 
 # greeks introduction
 
@@ -89,8 +87,6 @@ def finite_difference_delta_test(S_0, r,T,X,sigma,q, option_type):
     approx_delta = (black_scholes(S_0+ S_0*0.001, r,T,X,sigma,q, option_type) - black_scholes(S_0 - S_0*0.001, r,T,X,sigma,q, option_type))/(2*S_0*0.001)
     assert abs(delta(S_0, r,T,X,sigma,q, option_type)- approx_delta) < 1e-4 
 
-print(finite_difference_delta_test(1.2, 0.02, 0.5, 1.25, 0.25, 0,"put"))
-
 def finite_difference_gamma_test(S_0, r,T,X,sigma,q, option_type):
     approx_gamma = (black_scholes(S_0+ S_0*0.0001, r,T,X,sigma,q, option_type)- 2*black_scholes(S_0, r,T,X,sigma,q, option_type) + black_scholes(S_0 - S_0*0.0001, r,T,X,sigma,q, option_type))/((S_0*0.0001)**2)
     assert abs(gamma(S_0, r,T,X,sigma,q)- approx_gamma) < 1e-4 
@@ -106,7 +102,6 @@ def finite_difference_vega_test(S_0, r,T,X,sigma,q, option_type):
 def finite_difference_rho_test(S_0, r,T,X,sigma,q, option_type):
     approx_rho = 0.01*(black_scholes(S_0, r+0.001,T,X,sigma,q, option_type) - black_scholes(S_0, r-0.001,T,X,sigma,q, option_type))/(2*0.001)
     assert abs(rho(S_0, r,T,X,sigma,q,option_type)- approx_rho) < 1e-4 
-
 
 print(f"price : {black_scholes(1.2, 0.02, 0.5, 1.25, 0.25, 0,"put"):.4f}")
 print(f"delta:  {delta(1.2, 0.02, 0.5, 1.25, 0.25, 0,"put"):.4f}    approx = {finite_difference_delta_test(1.2, 0.02, 0.5, 1.25, 0.25, 0,"put")}")
