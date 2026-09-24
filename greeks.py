@@ -37,13 +37,13 @@ def theta(S_0, r,T,X,sigma,q, option_type):
 
 def vega(S_0, r,T,X,sigma,q): 
     d_1, d_2 = d1_d2(S_0, r,T,X,sigma,q)
-    return (S_0*np.exp(-q*T)*norm.pdf(d_1)*np.sqrt(T))*0.01
+    return (S_0*np.exp(-q*T)*norm.pdf(d_1)*np.sqrt(T))
 
 def rho(S_0, r,T,X,sigma,q, option_type): 
     d_1, d_2 = d1_d2(S_0, r,T,X,sigma,q)
     if option_type == "call":
-        return X*T*np.exp(-r * T)*norm.cdf(d_2)*0.01
+        return X*T*np.exp(-r * T)*norm.cdf(d_2)
     elif option_type == "put":
-        return -X*T*np.exp(-r * T)*norm.cdf(-d_2)*0.01
+        return -X*T*np.exp(-r * T)*norm.cdf(-d_2)
     else:
         return("Error")

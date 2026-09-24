@@ -103,9 +103,11 @@ def finite_difference_rho_test(S_0, r,T,X,sigma,q, option_type):
     approx_rho = 0.01*(black_scholes(S_0, r+0.001,T,X,sigma,q, option_type) - black_scholes(S_0, r-0.001,T,X,sigma,q, option_type))/(2*0.001)
     assert abs(rho(S_0, r,T,X,sigma,q,option_type)- approx_rho) < 1e-4 
 
-print(f"price : {black_scholes(1.2, 0.02, 0.5, 1.25, 0.25, 0,"put"):.4f}")
+print(f"price : {black_scholes(1.2, 0.02, 0.5, 1.25, 0.2, 0,"put"):.4f}")
 print(f"delta:  {delta(1.2, 0.02, 0.5, 1.25, 0.25, 0,"put"):.4f}    approx = {finite_difference_delta_test(1.2, 0.02, 0.5, 1.25, 0.25, 0,"put")}")
 print(f"gamma:  {gamma(1.2, 0.02, 0.5, 1.25, 0.25, 0):.4f}          approx = {finite_difference_gamma_test(1.2, 0.02, 0.5, 1.25, 0.25, 0,"put")}")
 print(f"theta:  {theta(1.2, 0.02, 0.5, 1.25, 0.25, 0,"put"):.4f}    approx = {finite_difference_theta_test(1.2, 0.02, 0.5, 1.25, 0.25, 0,"put")}")
 print(f"vega:   {vega(1.2, 0.02, 0.5, 1.25, 0.25, 0):.4f}           approx = {finite_difference_vega_test(1.2, 0.02, 0.5, 1.25, 0.25, 0,"put")}")
 print(f"rho:    {rho(1.2, 0.02, 0.5, 1.25, 0.25, 0,"put"):.4f}      approx = {finite_difference_rho_test(1.2, 0.02, 0.5, 1.25, 0.25, 0,"put")}")
+
+
